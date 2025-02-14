@@ -12,8 +12,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="max-w-xs md:max-w-2xl lg:max-w-5xl mx-auto">
-    <div v-if="pokemonStore.pokemons.length > 0" class="grid grid-cols-4 gap-2">
+  <main class="max-w-xs md:max-w-2xl lg:max-w-4xl 2xl:max-w-6xl mx-auto">
+    <div
+      v-if="pokemonStore.pokemons.length > 0"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2"
+    >
       <Cards
         v-for="pokemon in pokemonStore.pokemons"
         :key="pokemon.name"
