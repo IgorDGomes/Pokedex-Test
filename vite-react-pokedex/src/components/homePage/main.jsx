@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { PokedexContext } from "../../context/context";
-import { Card } from "../card";
-import { Navigation } from "../navigation";
+import { PokedexContext } from "../../context/pokemonContext";
+import { Card } from "./card";
+import { Navigation } from "./navigation";
 
 export function Main() {
   const [search, setSearch] = useState("");

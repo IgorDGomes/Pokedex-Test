@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
-import { getPokemonInfo } from "../utils/fetchRequest";
+import { getPokemonSprites } from "../../utils/fetchRequest";
 
 export function Card({ name, url }) {
   const [id, setId] = useState("");
@@ -11,7 +11,7 @@ export function Card({ name, url }) {
 
   async function getImages(url) {
     try {
-      const { frontImage, backImage, pokemonId } = await getPokemonInfo(url);
+      const { frontImage, backImage, pokemonId } = await getPokemonSprites(url);
       setFrontDefault(frontImage);
       setBackDefault(backImage);
       setId(pokemonId);
@@ -33,11 +33,13 @@ export function Card({ name, url }) {
         <div className="loader" />
       ) : (
         <>
-          <NavLink to={link}>{name}</NavLink>
-          <div>
-            <img src={frontDefault} />
-            <p>ID: #{id}</p>
-          </div>
+          <NavLink to={link}>
+            <span>{name}</span>
+            <div>
+              <img src={frontDefault} />
+              <p>ID: #{id}</p>
+            </div>
+          </NavLink>
         </>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { useContext, useState } from "react";
-import { PokedexContext } from "../context/context";
+import { PokedexContext } from "../../context/pokemonContext";
 
 export function Navigation() {
   const [pageNumber, setPageNumber] = useState(1);

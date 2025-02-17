@@ -1,34 +1,33 @@
 import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "lucide-react";
 import { useContext } from "react";
-import { NavLink } from "react-router";
-import { PokedexContext } from "../../context/context";
+import { useNavigate } from "react-router";
+import { PokedexContext } from "../../context/pokemonContext";
 
 export function NavBar({ id }) {
-  const { totalPokemons, setChangePokemon } = useContext(PokedexContext);
+  const { totalPokemons } = useContext(PokedexContext);
   const pokemonId = Number(id);
+  const navigate = useNavigate();
 
-  function previousPokemon(pokemonId) {
-    console.log(typeof Number(id));
-    setChangePokemon(true);
+  function previousPokemon() {
     if (pokemonId > 1) {
-      return `/pokemon/${pokemonId - 1}`;
+      return navigate(`/pokemon/${pokemonId - 1}`);
     }
   }
 
-  function nextPokemon(id) {
+  function nextPokemon() {
     if (pokemonId !== totalPokemons) {
-      return `/pokemon/${pokemonId + 1}`;
+      return navigate(`/pokemon/${pokemonId + 1}`);
     }
   }
 
   return (
     <div>
-      <NavLink to={previousPokemon(pokemonId)}>
+      <button onClick={previousPokemon}>
         <ArrowLeftCircleIcon />
-      </NavLink>
-      <NavLink to={nextPokemon(pokemonId)}>
+      </button>
+      <button onClick={nextPokemon}>
         <ArrowRightCircleIcon />
-      </NavLink>
+      </button>
     </div>
   );
 }

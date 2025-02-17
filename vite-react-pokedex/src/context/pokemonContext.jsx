@@ -1,17 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { PokedexContext } from "./context";
-import {
-  fetchPokemons,
-  getAllPokemonNames,
-  getPokemonInfo,
-} from "../utils/fetchRequest";
+import { createContext, useCallback, useEffect, useState } from "react";
+import { fetchPokemons, getAllPokemonNames } from "../utils/fetchRequest";
+
+export const PokedexContext = createContext();
 
 function PokedexProvider({ children }) {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(24);
 
-  // const [frontDefault, setFrontDefault] = useState("");
-  // const [backDefault, setBackDefault] = useState("");
   const [pokemonList, setPokemonList] = useState([]);
   const [allPokemonList, setAllPokemonList] = useState([]);
   const [pokemonNameAndUrlList, setPokemonNameAndUrlList] = useState([]);

@@ -1,9 +1,9 @@
-const BASE_API_URL = "https://pokeapi.co/api/v2/pokemon";
+const BASE_API_URL = "https://pokeapi.co/api/v2";
 
 async function fetchPokemons(offset, limit) {
   try {
     const response = await fetch(
-      `${BASE_API_URL}/?offset=${offset}&limit=${limit}`
+      `${BASE_API_URL}/pokemon/?offset=${offset}&limit=${limit}`
     );
     const data = await response.json();
 
@@ -19,7 +19,9 @@ async function fetchPokemons(offset, limit) {
 }
 
 async function getAllPokemonNames() {
-  const response = await fetch(`${BASE_API_URL}/?offset=0&limit=100000`);
+  const response = await fetch(
+    `${BASE_API_URL}/pokemon/?offset=0&limit=100000`
+  );
   const data = await response.json();
   const allPokemonList = data.results;
   const allPokemonNamesAndUrl = allPokemonList.map((pokemon) => {
@@ -29,7 +31,7 @@ async function getAllPokemonNames() {
   return { allPokemonList, allPokemonNamesAndUrl };
 }
 
-async function getPokemonInfo(url) {
+async function getPokemonSprites(url) {
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -43,6 +45,26 @@ async function getPokemonInfo(url) {
   }
 }
 
-export { fetchPokemons, getAllPokemonNames, getPokemonInfo };
+async function getPokemonInfo(id) {
+  try {
+    const chainData = await fetch(`${BASE_API_URL}/evolution-chain/${id}`).then(
+      (res) => res.json()
+    );
+    const evolutionChain = chainData.chain;
+
+    const pokemonData = await fetch(`${BASE_API_URL}/pokemon/${id}`).then(
+      (res) => res.json()
+    );
+
+    const pokemonTypeArray = pokemonData.types;
+    const pokemonWeight = pokemonData.weight;
+
+    return { evolutionChain, pokemonTypeArray, pokemonWeight };
+  } catch (error) {
+    console.error("Error fetching pokemon info: ", error);
+  }
+}
+
+export { fetchPokemons, getAllPokemonNames, getPokemonSprites, getPokemonInfo };
 
 //! SORT ARRAY

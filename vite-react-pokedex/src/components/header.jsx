@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import logo from "../../assets/kinda-pokemon-logo.png";
+import logo from "../assets/kinda-pokemon-logo.png";
 
 export function Header() {
   return (
